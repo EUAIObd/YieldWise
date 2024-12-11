@@ -393,6 +393,14 @@ nav.navbar.bootsnav {
     padding: 33px 0px 57px;
     text-transform: uppercase;
 }
+.navbar-header button.navbar-brand,.navbar-header button.navbar-brand:hover,.navbar-header button.navbar-brand:focus {
+    display: inline-block;
+    color: #d92cf9;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 33px 0px 57px;
+    text-transform: uppercase;
+}
 /*.navbar-brand*/
 
 /*.nav li*/
@@ -406,10 +414,27 @@ nav.navbar.bootsnav ul.nav > li > a {
     -o-transition: 0.3s linear; 
     transition: 0.3s linear;
 }
+nav.navbar.bootsnav ul.nav > li > button {
+    font-size: 16px;
+    font-weight: 400;
+    text-transform:uppercase;
+    -webkit-transition: 0.3s linear; 
+    -moz-transition: 0.3s linear; 
+    -ms-transition: 0.3s linear; 
+    -o-transition: 0.3s linear; 
+    transition: 0.3s linear;
+}
 nav.navbar.bootsnav ul.nav > li > a {padding: 35px 20px;}
 nav.navbar.bootsnav ul.nav > li > a:hover,nav.navbar.bootsnav ul.nav > li > a:focus,nav.navbar.bootsnav ul.nav > li.active>a{color: #d92cf9;}
+nav.navbar.bootsnav ul.nav > li > button {padding: 35px 20px;}
+nav.navbar.bootsnav ul.nav > li > button:hover,nav.navbar.bootsnav ul.nav > li > button:focus,nav.navbar.bootsnav ul.nav > li.active>button{color: #d92cf9;}
+
+
 
 nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after {
+    content: "";
+}
+nav.navbar.bootsnav ul.nav > li.dropdown > button.dropdown-toggle:after {
     content: "";
 }
 nav.navbar.bootsnav ul.nav > li.dropdown span {
@@ -418,6 +443,9 @@ nav.navbar.bootsnav ul.nav > li.dropdown span {
 }
 .sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li > a {color:#6a708e;}
 .sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li > a:hover,.sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li > a:focus,.sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li.active>a{color: #d92cf9;}
+.sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li > button {color:#6a708e;}
+.sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li > button:hover,.sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li > button:focus,.sticky-wrapper.is-sticky nav.navbar.bootsnav ul.nav > li.active>button{color: #d92cf9;}
+
 /*.nav li*/
 
 

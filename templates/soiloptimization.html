@@ -12,7 +12,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
         
         <!-- title of site -->
-        <title>Browny</title>
+        <title>YieldWise</title>
 
         <!-- For favicon png -->
 		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
@@ -70,17 +70,18 @@
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
 			                </button>
-			                <a class="navbar-brand" href="inputform.html">browny</a>
+			                <a class="navbar-brand" href="{{url_for('inputform')}}">yieldwise</a>
 			            </div><!--/.navbar-header-->
 			            <!-- End Header Navigation -->
 
 			            <!-- Collect the nav links, forms, and other content for toggling -->
-			            <div class="collapse navbar-collapse menu-ui-design" style="margin-left: 100px" id="navbar-menu">
-			                <ul class="nav navbar-nav navbar-center"  style="border: 3px solid #333; border-radius: 50px; width:1150px; height: 1px;" data-in="fadeInDown" data-out="fadeOutUp">
+			            <div class="collapse navbar-collapse menu-ui-design"  id="navbar-menu">
+			                <ul class="nav navbar-nav navbar-right"  data-in="fadeInDown" data-out="fadeOutUp">
 			                <li class=" smooth-menu active" ></li>
-			                    <li class="smooth-menu" style="margin-left: 200px"><a href="index.html#education">education</a></li>
-			                    <li class="smooth-menu" style="margin-left: 200px"><a href="#skills">skills</a></li>
-			                    <li class="smooth-menu" style="margin-left: 200px"><a href="#experience">experience</a></li>
+			                   <!-- <li class="smooth-menu" ><a onclick=="{{url_for('cropguide')}}">Crop Guide</a></li> -->
+			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('cropguide')}}'">Crop Guide</button></li>
+			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('soiloptimization')}}'">Soil Optimization</button></li>
+			                    <li class="smooth-menu" ><a href="/inputform/education">Education</a></li>
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -90,61 +91,31 @@
 
 		    <div class="clearfix"></div>
 
-			
-		<div class="section-heading text-left" style="margin-left: 15%; margin-top: 180px;">
-			<h2>about me</h2>
+		<section id="cropguide" class="education" style="margin-top: 7em;">
+		<div class="section-heading text-left" style="margin-left: 15%;">
+			<h2 class="headL">Customize your Crop</h2>
 		</div>
-		<!-- Form Table -->
-		<div class="form-container">
-		<form class="form-grid">
-			<!-- First Column: Soil Nutrition -->
-			<div class="form-column">
-			<h3>Soil Nutrition</h3>
-			<div class="form-row">
-				<input type="text" id="soil-nutrition-1" name="soil-nutrition-1" placeholder="Enter soil nutrition value 1">
-			</div>
-			<div class="form-row">
-				<input type="text" id="soil-nutrition-2" name="soil-nutrition-2" placeholder="Enter soil nutrition value 2">
-			</div>
-			<div class="form-row">
-				<input type="text" id="soil-nutrition-3" name="soil-nutrition-3" placeholder="Enter soil nutrition value 3">
-			</div>
-			</div>
-			
-			<!-- Second Column: Weather Condition -->
-			<div class="form-column">
-			<h3>Weather Condition</h3>
-			<div class="form-row">
-				<input type="text" id="weather-condition-1" name="weather-condition-1" placeholder="Enter weather condition 1">
-			</div>
-			<div class="form-row">
-				<input type="text" id="weather-condition-2" name="weather-condition-2" placeholder="Enter weather condition 2">
-			</div>
-			<div class="form-row">
-				<input type="text" id="weather-condition-3" name="weather-condition-3" placeholder="Enter weather condition 3">
-			</div>
-			</div>
-					
-			<!-- Third Column: Soil Type (Drop-down) -->
-			<div class="form-column">
-			<h3>Soil Type</h3>
-			<div class="form-row">
-				<select id="soil-type" name="soil-type">
-				<option value="clay">Clay</option>
-				<option value="loamy">Loamy</option>
-				<option value="sandy">Sandy</option>
-				</select>
-			</div>
-			</div>
-
-			<!-- Submit Button -->
-			<div class="form-row submit-button">
-			<button type="submit">Submit</button>
-			</div>
-		</form>
+		<hr class="black">
+		<div class="container">
+			<p class="explanation">This is a brief explanation of why they are number one.</p>
+			<br>
+			<form>
+				<label for="cropSelect">Select the crop you would like to plant:</label>
+				<select id="cropSelect" name="crop">
+					<option value="">Select a crop</option>
+					<option value="tomato">Tomato</option>
+					<option value="potato">Potato</option>
+					<option value="carrot">Carrot</option>
+					</select>
+				<br>
+				<input type="submit" value="Submit">
+			</form>
+						
+						
 		</div>
+		</section>
 
-
+		  
 		<script src="assets/js/jquery.js"></script>
         
         <!--modernizr.min.js-->
