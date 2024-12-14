@@ -78,14 +78,7 @@ def inputform():
                             'image': crop[4]
                         })
 
-        # If no crop information found, set default info
-        # if not top_crops_info:
-        #     top_crops_info = [{'name': '1', 'explanation': '1', 'trivia': '1', 'image': "1"},
-        #                       {'name': '2', 'explanation': '2', 'trivia': '2', 'image': "2"},
-        #                       {'name': '3', 'explanation': '3', 'trivia': '3', 'image': "3"},
-        #                       {'name': '4', 'explanation': '4', 'trivia': '4', 'image': "4"},
-        #                       {'name': '5', 'explanation': '5', 'trivia': '5', 'image': "5"}]
-        
+  
         while len(top_crops_info) < 5:
             top_crops_info.append({
                 'name': 'Default Crop',
@@ -132,7 +125,8 @@ def cropguide():
 # Soil Optimization page
 @flask_app.route("/soiloptimization")
 def soiloptimization():
-    return render_template("soiloptimization.html")
+    crops = get_crop_data()
+    return render_template("soiloptimization.html", crops=crops)
 
 # Start the app
 if __name__ == "__main__":

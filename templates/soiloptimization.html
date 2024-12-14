@@ -93,11 +93,10 @@
 			<form>
 				<label for="cropSelect">Select the crop you would like to plant:</label>
 				<select id="cropSelect" name="crop">
-					<option value="">Select a crop</option>
-					<option value="tomato">Tomato</option>
-					<option value="potato">Potato</option>
-					<option value="carrot">Carrot</option>
-					</select>
+				{% for crop in crops %}
+					<option value="{{ crop[1] }}">{{ crop[1] }}</option>
+				{% endfor %}
+				</select>
 				<br>
 				<input type="submit" value="Submit">
 			</form>
