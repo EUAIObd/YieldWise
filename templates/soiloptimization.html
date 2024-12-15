@@ -46,8 +46,6 @@
     </head>
 	
 	<body>
-
-		
 		<!-- top-area Start -->
 		<header class="top-area">
 			<div class="header-area">
@@ -82,28 +80,81 @@
 
 		    <div class="clearfix"></div>
 
-		<section id="cropguide" class="education" style="margin-top: 7em;">
-		<div class="section-heading text-left" style="margin-left: 15%;">
-			<h2 class="headL">Customize your Crop</h2>
-		</div>
-		<hr class="black">
-		<div class="container">
-			<p class="explanation">This is a brief explanation of why they are number one.</p>
-			<br>
-			<form>
-				<label for="cropSelect">Select the crop you would like to plant:</label>
-				<select id="cropSelect" name="crop">
-				{% for crop in crops %}
-					<option value="{{ crop[1] }}">{{ crop[1] }}</option>
-				{% endfor %}
-				</select>
-				<br>
-				<input type="submit" value="Submit">
-			</form>
-						
-						
-		</div>
-		</section>
+			<section id="soiloptimization" class="education" style="margin-top: 7em;">
+				<div class="section-heading text-left" style="margin-left: 15%;">
+					<h2>Customize your Crop</h2>
+				</div>
+				<hr class="black">
+				<div class="container">
+			
+					{% if user_data %}  
+					<div class="input-values-table">
+						<table>
+							<thead>
+								<tr>
+									{% for feature in user_data %}
+									<th>{{ feature }}</th>
+									{% endfor %}
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									{% for value in user_data.values() %}
+									<td>{{ value }}</td>
+									{% endfor %}
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr> 
+					{% endif %}
+			
+					<form id="cropForm" method="POST">
+						<label for="cropSelect">Select the crop you would like to plant:</label>
+						<select id="cropSelect" name="crop">
+							{% for crop in crops %}
+							<option value="{{ crop[1] }}" {% if selected_crop == crop[1] %} selected{% endif %}>{{ crop[1] }}</option>
+							{% endfor %}
+						</select>
+						<button style="    padding: 10px 30px;
+						font-size: 1.2rem;
+						background-color: #4CAF50;
+						color: white;
+						border: none;
+						border-radius: 30px; /* Oblong shape */
+						cursor: pointer;
+						transition: background-color 0.3s ease;" type="submit">Check Optimization</button>
+					</form>
+			
+					<div id="feedbackContainer" class="feedback-container">
+						{% if feedback %}
+							{% if feedback.optimal_ranges %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.optimal_ranges }}
+								</div>
+							{% elif feedback.crop_selection %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.crop_selection }}
+								</div>
+							{% elif feedback.input_data %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.input_data }}
+								</div>
+							{% elif feedback.crop %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.crop }}
+								</div>
+							{% else %}
+								{% for feature, message in feedback.items() %}
+									<div class="feedback-item {% if 'Good' in message %}feedback-good{% elif 'improvement' in message %}feedback-improvement{% elif 'harmful' in message %}feedback-harmful{% else %}feedback-missing{% endif %}">
+										<strong>{{ feature }}:</strong> {{ message }}
+									</div>
+								{% endfor %}
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</section>
 
 		  
 		<script src="assets/js/jquery.js"></script>
@@ -139,7 +190,11 @@
         
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
-        
+		<script>
+		document.getElementById('cropForm').addEventListener('submit', function(event) {
+            // You can add client-side validation here if needed
+        });
+		</script>
     </body>
 	
 </html>

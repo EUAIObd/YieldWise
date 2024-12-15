@@ -85,13 +85,13 @@
 			<div class="form-column">
 			<h3>Soil Nutrition</h3>
 			<div class="form-row">
-				<input type="text" id="NitrogenInp" name="NitrogenInp" placeholder="Nitrogen(N)" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="NitrogenInp" name="NitrogenInp" placeholder="Nitrogen(N)" required="required" pattern="\d+(\.\d+)?" min="0" max="300" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			<div class="form-row">
-				<input type="text" id="PotassiumInp" name="PotassiumInp" placeholder="Potassium(K)" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="PotassiumInp" name="PotassiumInp" placeholder="Potassium(K)" required="required" pattern="\d+(\.\d+)?" min="0" max="300" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			<div class="form-row">
-				<input type="text" id="PhosphorusInp" name="PhosphorusInp" placeholder="Phosphorus(P)" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="PhosphorusInp" name="PhosphorusInp" placeholder="Phosphorus(P)" required="required" pattern="\d+(\.\d+)?" min="0" max="300" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			</div>
 			
@@ -99,13 +99,13 @@
 			<div class="form-column">
 			<h3>Weather Condition</h3>
 			<div class="form-row">
-				<input type="text" id="TemperatureInp" name="TemperatureInp" placeholder="Temperature" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="TemperatureInp" name="TemperatureInp" placeholder="Temperature (°C)" required="required" pattern="^\d{1,3}(\.\d{1,10})?$" min="8" max="45" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			<div class="form-row">
-				<input type="text" id="RainfallInp" name="RainfallInp" placeholder="Rainfall" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="RainfallInp" name="RainfallInp" placeholder="Rainfall (in mm)" required="required" pattern="\d+(\.\d+)?" min="5" max="2000" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			<div class="form-row">
-				<input type="text" id="HumidityInp" name="HumidityInp" placeholder="Humidity" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="HumidityInp" name="HumidityInp" placeholder="Humidity (in %)" required="required" pattern="^\d{1,2}(\.\d{1,10})?$" min="1" max="100" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			</div>
 					
@@ -113,7 +113,7 @@
 			<div class="form-column">
 			<h3>Soil Ph</h3>
 			<div class="form-row">
-				<input type="text" id="PhInp" name="PhInp" placeholder="Ph Level" required="required" pattern="\d+(\.\d+)?" title="Please enter a numeric value">
+				<input type="number" id="PhInp" name="PhInp" placeholder="Ph Level (1-10)" required="required" pattern="^\d{1,2}(\.\d{1,10})?$" min="1" max="10" step="0.0000000001" title="Please enter a numeric value">
 			</div>
 			</div>
 
@@ -158,7 +158,47 @@
         
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
-        
+		<script>
+		const temperatureInput = document.getElementById('TemperatureInp');
+
+		temperatureInput.addEventListener('input', () => {
+		const temperature = parseFloat(temperatureInput.value);
+		if (temperature < 8 || temperature > 45) {
+			temperatureInput.setCustomValidity('Optimal plant growth occurs between 8°C to 45°C.\nExtreme temperatures can harm crop development.');
+		} else {
+			temperatureInput.setCustomValidity('');
+		}
+		});
+
+		const humidityInput = document.getElementById('HumidityInp');
+
+		humidityInput.addEventListener('input', () => {
+		const humidity = parseFloat(humidityInput.value);
+		if (humidity < 1 || humidity > 100) {
+			humidityInput.setCustomValidity('Humidity must be between 1% and 100%.');
+		} else {
+			humidityInput.setCustomValidity('');
+		}
+		});
+
+
+		const nitrogenInput = document.getElementById('NitrogenInp');
+		const potassiumInput = document.getElementById('PotassiumInp');
+		const phosphorusInput = document.getElementById('PhosphorusInp');
+
+		const inputs = [nitrogenInput, potassiumInput, phosphorusInput];
+
+		inputs.forEach(input => {
+		input.addEventListener('input', () => {
+			const value = parseFloat(input.value);
+			if (value < 0 || value > 300) {
+			input.setCustomValidity('Value must be between 0 and 300.');
+			} else {
+			input.setCustomValidity('');
+			}
+		});
+		});
+		</script>
     </body>
 	
 </html>
