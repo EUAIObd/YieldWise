@@ -15,7 +15,7 @@
         <title>YieldWise</title>
 
         <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+		<link rel="shortcut icon" type="image/icon" href="assets/logo/YW-circle.png"/>
        
         <!--font-awesome.min.css-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -42,21 +42,10 @@
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
         
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		
-        <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
     </head>
 	
 	<body>
-		<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-		
 		<!-- top-area Start -->
 		<header class="top-area">
 			<div class="header-area">
@@ -81,7 +70,7 @@
 			                   <!-- <li class="smooth-menu" ><a onclick=="{{url_for('cropguide')}}">Crop Guide</a></li> -->
 			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('cropguide')}}'">Crop Guide</button></li>
 			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('soiloptimization')}}'">Soil Optimization</button></li>
-			                    <li class="smooth-menu" ><a href="/inputform/education">Education</a></li>
+			                    <li class="smooth-menu" ><button onclick="window.location.href='#'">Education</button></li>
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -91,29 +80,82 @@
 
 		    <div class="clearfix"></div>
 
-		<section id="cropguide" class="education" style="margin-top: 7em;">
-		<div class="section-heading text-left" style="margin-left: 15%;">
-			<h2 class="headL">Customize your Crop</h2>
-		</div>
-		<hr class="black">
-		<div class="container">
-			<p class="explanation">This is a brief explanation of why they are number one.</p>
-			<br>
-			<form>
-				<label for="cropSelect">Select the crop you would like to plant:</label>
-				<select id="cropSelect" name="crop">
-					<option value="">Select a crop</option>
-					<option value="tomato">Tomato</option>
-					<option value="potato">Potato</option>
-					<option value="carrot">Carrot</option>
-					</select>
-				<br>
-				<input type="submit" value="Submit">
-			</form>
-						
-						
-		</div>
-		</section>
+			<section id="soiloptimization" class="education" style="margin-top: 7em;">
+				<div class="section-heading text-left" style="margin-left: 15%;">
+					<h2>Customize your Crop</h2>
+				</div>
+				<hr class="black">
+				<div class="container">
+			
+					{% if user_data %}  
+					<div class="input-values-table">
+						<table>
+							<thead>
+								<tr>
+									{% for feature in user_data %}
+									<th>{{ feature }}</th>
+									{% endfor %}
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									{% for value in user_data.values() %}
+									<td>{{ value }}</td>
+									{% endfor %}
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr> 
+					{% endif %}
+			
+					<form id="cropForm" method="POST">
+						<label for="cropSelect">Select the crop you would like to plant:</label>
+						<br>
+						<select id="cropSelect" name="crop">
+							{% for crop in crops %}
+								<option value="{{ crop['name'] }}" {% if selected_crop == crop['name'] %} selected{% endif %}>{{ crop['name'] }}</option>
+							{% endfor %}
+						</select>
+						<button style="    padding: 10px 30px;
+						font-size: 1.2rem;
+						background-color: #4CAF50;
+						color: white;
+						border: none;
+						border-radius: 30px; /* Oblong shape */
+						cursor: pointer;
+						transition: background-color 0.3s ease;" type="submit">Check Optimization</button>
+					</form>
+			
+					<div id="feedbackContainer" class="feedback-container">
+						{% if feedback %}
+							{% if feedback.optimal_ranges %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.optimal_ranges }}
+								</div>
+							{% elif feedback.crop_selection %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.crop_selection }}
+								</div>
+							{% elif feedback.input_data %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.input_data }}
+								</div>
+							{% elif feedback.crop %}
+								<div class="feedback-item feedback-missing">
+									{{ feedback.crop }}
+								</div>
+							{% else %}
+								{% for feature, message in feedback.items() %}
+									<div class="feedback-item {% if 'Good' in message %}feedback-good{% elif 'improvement' in message %}feedback-improvement{% elif 'harmful' in message %}feedback-harmful{% else %}feedback-missing{% endif %}">
+										<strong>{{ feature }}:</strong> {{ message }}
+									</div>
+								{% endfor %}
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</section>
 
 		  
 		<script src="assets/js/jquery.js"></script>
@@ -149,7 +191,11 @@
         
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
-        
+		<script>
+		document.getElementById('cropForm').addEventListener('submit', function(event) {
+            // You can add client-side validation here if needed
+        });
+		</script>
     </body>
 	
 </html>
