@@ -15,7 +15,7 @@
         <title>YieldWise</title>
 
         <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+		<link rel="shortcut icon" type="image/icon" href="assets/logo/YW-circle.png"/>
        
         <!--font-awesome.min.css-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -70,7 +70,7 @@
 			                   <!-- <li class="smooth-menu" ><a onclick=="{{url_for('cropguide')}}">Crop Guide</a></li> -->
 			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('cropguide')}}'">Crop Guide</button></li>
 			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('soiloptimization')}}'">Soil Optimization</button></li>
-			                    <li class="smooth-menu" ><a href="/inputform/education">Education</a></li>
+			                    <li class="smooth-menu" ><button onclick="window.location.href='#'">Education</button></li>
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -111,9 +111,10 @@
 			
 					<form id="cropForm" method="POST">
 						<label for="cropSelect">Select the crop you would like to plant:</label>
+						<br>
 						<select id="cropSelect" name="crop">
 							{% for crop in crops %}
-							<option value="{{ crop[1] }}" {% if selected_crop == crop[1] %} selected{% endif %}>{{ crop[1] }}</option>
+								<option value="{{ crop['name'] }}" {% if selected_crop == crop['name'] %} selected{% endif %}>{{ crop['name'] }}</option>
 							{% endfor %}
 						</select>
 						<button style="    padding: 10px 30px;

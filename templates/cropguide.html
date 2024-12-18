@@ -15,7 +15,7 @@
         <title>YieldWise</title>
 
         <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+		<link rel="shortcut icon" type="image/icon" href="assets/logo/YW-circle.png"/>
        
         <!--font-awesome.min.css-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -68,9 +68,9 @@
 			                <ul class="nav navbar-nav navbar-right"  data-in="fadeInDown" data-out="fadeOutUp">
 			                <li class=" smooth-menu active" ></li>
 			                   <!-- <li class="smooth-menu" ><a onclick=="{{url_for('cropguide')}}">Crop Guide</a></li> -->
-			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('cropguide')}}'";>Crop Guide</button></li>
+			                    <li class="smooth-menu" ><button onclick="window.location.href='{{url_for('cropguide')}}'">Crop Guide</button></li>
 			                    <li class="smooth-menu" ><button onclick="window.location.href='{{ url_for('soiloptimization') }}'">Soil Optimization</button></li>
-			                    <li class="smooth-menu" ><a href="/inputform/education">Education</a></li>
+			                    <li class="smooth-menu" ><button onclick="window.location.href='#'">Education</button></li>
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -101,7 +101,7 @@
 						</div>
 					</div>
 					<div class="rank-image">
-						<img src="{{ url_for('static' , filename='images/crop/' + predictions[0].image) }}" alt="{{ predictions[0].name }}">
+						<img src="{{ url_for('static', filename='images/crop/' + predictions[0].image) }}" alt="{{ predictions[0].name }}">
 					</div>
 				</div>
 			</div>
